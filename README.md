@@ -1,3 +1,6 @@
-dependencis ->
-matplotlib
-z3-solver
+# FloorPlan Generator
+
+## dependencies ->  
+
+matplotlib  
+z3-solver  
