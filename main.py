@@ -3,10 +3,32 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
 # Define room sizes (width, height)
-rooms = {"A": (3, 2), "B": (2, 3), "C": (2, 2), "D": (4, 1), "E": (2, 2), "F": (5, 6)}
+rooms = {
+    "A": (3, 2),
+    "B": (2, 3),
+    "C": (2, 2),
+    "D": (4, 1),
+    "E": (2, 2),
+    "F": (3, 3),
+    "G": (2, 4),
+    "H": (3, 2),
+    "I": (4, 2),
+    "J": (2, 2)
+}
 
 # Define adjacency constraints (edges in the graph)
-edges = [("A", "B"), ("A", "C"), ("B", "D"), ("C", "E"), ("E", "F")]
+edges = [
+    ("A", "B"),
+    ("A", "C"),
+    ("B", "D"),
+    ("E", "F"),
+    ("F", "H"),
+    ("G", "I"),
+    ("H", "J"),
+    ("I", "J"),
+    ("B", "G"),
+    ("C", "H"),
+]
 
 s = Solver()
 
