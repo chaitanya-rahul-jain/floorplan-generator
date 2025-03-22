@@ -1,6 +1,10 @@
 from z3 import Int, Solver, Or, And, sat
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
+import time
+
+# Track execution time
+start_time = time.time()
 
 # Define room sizes (width, height)
 rooms = {
@@ -182,6 +186,10 @@ if s.check() == sat:
         ax.text(-0.25, i, str(i), va="center")
 
     plt.tight_layout()
+
+    execution_time = time.time() - start_time
+    print(f"Total execution time: {execution_time:.2f} seconds")
+    
     plt.show()
 else:
     print("No valid layout found.")
