@@ -47,16 +47,6 @@ def visualize_boundary(ax, outer_width, outer_height, holes):
         )
         ax.add_patch(hole_rect)
 
-def is_point_in_boundary(x, y, outer_width, outer_height, holes):
-    if x < 0 or y < 0 or x >= outer_width or y >= outer_height:
-        return False
-
-    for hole_x, hole_y, hole_width, hole_height in holes:
-        if hole_x <= x < hole_x + hole_width and hole_y <= y < hole_y + hole_height:
-            return False
-
-    return True
-
 def main():
     rooms = {
         "A": (3, 2),
