@@ -5,6 +5,7 @@ import time
 
 start_time = time.time()
 
+# take the input for the user boundary
 def get_user_boundary():
     print("Define your boundary:")
     print("1. Enter outer boundary dimensions as 'width height'")
@@ -22,6 +23,7 @@ def get_user_boundary():
 
     return outer_width, outer_height, holes
 
+# draws the boundary
 def visualize_boundary(ax, outer_width, outer_height, holes):
     outer_rect = patches.Rectangle(
         (0, 0),
@@ -48,11 +50,13 @@ def visualize_boundary(ax, outer_width, outer_height, holes):
         ax.add_patch(hole_rect)
 
 def main():
+    
+    # Define the rooms
     rooms = {
         "A": (3, 2),
         "B": (2, 3),
         "C": (2, 2),
-        "D": (4, 1),
+        "D": (1, 3),
         "E": (2, 2),
         "F": (3, 3),
         "G": (2, 4),
@@ -72,18 +76,26 @@ def main():
         ("I", "J"),
         ("B", "G"),
         ("C", "H"),
+        ("A", "G"),
+        ("A", "D"),
+        ("A", "J"),
     ]
 
+
+    # get the user boundary
     outer_width, outer_height, holes = get_user_boundary()
 
+    # create the solver
     s = Solver()
 
+    # create the variables
     positions = {}
     for name in rooms:
         x_coordinate = Int(f"x_{name}")
         y_coordinate = Int(f"y_{name}")
         positions[name] = (x_coordinate, y_coordinate)
 
+    # first constraint - room can't be placed beyond max possible dimensions
     for name, (x, y) in positions.items():
         s.add(x >= 0, y >= 0)
 
@@ -103,6 +115,7 @@ def main():
                 )
             )
 
+    # second constraint - rooms can't overlap 
     for name1 in rooms:
         for name2 in rooms:
             if name1 >= name2:
@@ -122,6 +135,7 @@ def main():
                 )
             )
 
+    # third constraint - rooms are adjacent  
     for name1, name2 in edges:
         x1, y1 = positions[name1]
         x2, y2 = positions[name2]
